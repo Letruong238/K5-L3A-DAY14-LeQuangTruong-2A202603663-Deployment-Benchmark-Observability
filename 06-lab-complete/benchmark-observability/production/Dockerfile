@@ -29,6 +29,9 @@ ENV PATH=/home/agent/.local/bin:$PATH
 ENV PYTHONPATH=/app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+# Sửa lỗi: user `agent` có HOME=/app (useradd -d /app) nên Python tìm user site-packages ở
+# /app/.local → không thấy uvicorn → container restart liên tục. Chỉ rõ nơi đã copy thư viện vào.
+ENV PYTHONUSERBASE=/home/agent/.local
 
 EXPOSE 8000
 
